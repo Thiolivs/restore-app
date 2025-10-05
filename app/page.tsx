@@ -8,18 +8,17 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+
 import { CreateAccountForm } from "@/components/auth/create-account-form";
 import { LoginAccountForm } from "@/components/auth/login-account-form";
 
 export default async function Home() {
+  
   let loggedIn = false
 
   try{
-
     const supabase = createServerComponentClient({ cookies });
     const { data:{ session } } = await supabase.auth.getSession();
-
-
     if (session) loggedIn = true
   }
   catch(error){
@@ -27,7 +26,6 @@ export default async function Home() {
   }
 
   finally{
-        
     if (loggedIn) redirect("/user-app", RedirectType.replace);
   }
   
